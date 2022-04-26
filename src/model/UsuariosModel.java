@@ -64,9 +64,9 @@ public class UsuariosModel extends Conexion {
     }
     
        public DefaultTableModel mostrar(String valor) {
-        this.consulta = "SELECT * FROM usuarios WHERE CONCAT(usuario) LIKE '%"+valor+"%'";
-        String[] titulos = {"ID", "Usuario", "Password"};
-        String[] datos = new String[3];
+        this.consulta = "SELECT id,usuario FROM usuarios WHERE CONCAT(usuario) LIKE '%"+valor+"%'";
+        String[] titulos = {"ID", "Usuario"};
+        String[] datos = new String[2];
         this.modelo = new DefaultTableModel(null, titulos) {
             public boolean isCellEditable(int row, int col) {
                 return false;
@@ -79,8 +79,6 @@ public class UsuariosModel extends Conexion {
             while (rs.next()) {
                 datos[0] = rs.getString("id");
                 datos[1] = rs.getString("usuario");
-                datos[2] = rs.getString("password");
-                
                 this.modelo.addRow(datos);
             }
             this.cn.close();

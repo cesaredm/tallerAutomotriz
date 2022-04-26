@@ -200,7 +200,7 @@ public class FacturacionModel extends Conexion {
 
 	public void mostrarProformas(int proforma) {
 		this.cn = conexion();
-		this.consulta = "SELECT id,DATE_FORMAT(fecha,'%d - %M - %y %r') AS fecha,auto,total FROM proformas WHERE id = ?";
+		this.consulta = "SELECT id,DATE_FORMAT(fecha,'%d - %M - %y %r') AS fecha,auto,total FROM proformas WHERE id = ? ORDER BY id DESC LIMIT 30";
 		String[] titulos = {"N. Proforma", "Fecha y hora", "Placa", "Total"};
 		this.datos = new String[4];
 		this.tableModelOtros = new DefaultTableModel(null, titulos) {
@@ -235,7 +235,8 @@ public class FacturacionModel extends Conexion {
 
 	public void mostrarProformaPorPlaca(String placa) {
 		this.cn = conexion();
-		this.consulta = "SELECT id,DATE_FORMAT(fecha,'%d - %M - %y %r') AS fecha,auto,total FROM proformas WHERE auto LIKE ? LIMIT 30";
+		this.consulta = "SELECT id,DATE_FORMAT(fecha,'%d - %M - %y %r') AS fecha,auto,total FROM proformas WHERE auto LIKE ? ORDER BY id DESC"
+			+ " LIMIT 30";
 		String[] titulos = {"N. Proforma", "Fecha y hora", "Placa", "Total"};
 		this.datos = new String[4];
 		this.tableModelOtros = new DefaultTableModel(null, titulos) {
@@ -309,7 +310,7 @@ public class FacturacionModel extends Conexion {
 			this.pst = this.cn.prepareStatement(this.consulta);
 			this.rs = this.pst.executeQuery();
 			while (this.rs.next()) {
-				this.modeloCmb.addElement(new ComponentesCmbModel(this.rs.getInt("id"), this.rs.getString("nombre")));
+				this.modeloCmb.addElement(new CmbServicios(this.rs.getInt("id"), this.rs.getString("nombre")));
 			}
 			this.cn.close();
 		} catch (SQLException e) {

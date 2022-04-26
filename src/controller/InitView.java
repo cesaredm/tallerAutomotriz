@@ -32,6 +32,9 @@ public class InitView implements MouseListener {
 	ComponenteModel componenteModel;
 	ComponenteController componenteController;
 
+	//para crear servicios y componentes en facturacion
+	CreateServiceComponentFacturacion serivicesController;
+	
 	AutosModel autosModel;
 	AutosController autosController;
 
@@ -61,6 +64,8 @@ public class InitView implements MouseListener {
 
 		this.componenteModel = new ComponenteModel();
 		this.componenteController = new ComponenteController(menu, componenteModel);
+
+		this.serivicesController = new CreateServiceComponentFacturacion(menu ,this.serviciosModel, this.componenteModel);
 
 		this.autosModel = new AutosModel();
 		this.autosController = new AutosController(menu, autosModel);

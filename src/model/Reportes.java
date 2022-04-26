@@ -26,11 +26,13 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author CESAR DIAZ MARADIAGA
  */
 public class Reportes extends Conexion {
+
 	PreparedStatement pst;
 	ResultSet rs;
 	Connection cn;
 	SimpleDateFormat sdf;
 	private int idFactura;
+	private int idProforma;
 	private String cliente,
 		direccion,
 		marca,
@@ -39,11 +41,12 @@ public class Reportes extends Conexion {
 		placa,
 		chasis,
 		motor,
-		vin;
+		vin,
+		tipoDoc;
 	private java.util.Date fecha;
 	private float totalFactura;
 
-	public Reportes(){
+	public Reportes() {
 		this.sdf = new SimpleDateFormat("EEEEEEEEE dd 'de' MMMMM 'de' yyyy HH:mm:ss z");
 	}
 
@@ -95,26 +98,55 @@ public class Reportes extends Conexion {
 		this.vin = vin;
 	}
 
-	
+	public int getIdProforma() {
+		return idProforma;
+	}
 
-	
-	
+	public void setIdProforma(int idProforma) {
+		this.idProforma = idProforma;
+	}
+
+	public String getTipoDoc() {
+		return tipoDoc;
+	}
+
+	public void setTipoDoc(String tipoDoc) {
+		this.tipoDoc = tipoDoc;
+	}
+
+
+	public void generarPDF(){
+		if(this.tipoDoc.equals("factura")){
+			try {
+				this.generarFactura();
+			} catch (SQLException ex) {
+				Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}else if(this.tipoDoc.equals("proforma")){
+			try {
+				this.generarProforma();
+			} catch (SQLException ex) {
+				Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}
+	}
+
 	public void generarFactura() throws SQLException {
 		try {
 			this.cn = conexion();
 			JasperReport Reporte = null;
 			Map parametros = new HashMap();
-	                parametros.put("idFactura", this.idFactura);
+			parametros.put("idFactura", this.idFactura);
 			parametros.put("fecha", this.sdf.format(this.fecha));
-	                parametros.put("cliente", this.cliente);
-	                parametros.put("marca", this.marca);
-			parametros.put("modelo",this.modelo);
-			parametros.put("placa",this.placa);
-			parametros.put("color",this.color);
-			parametros.put("chasis",this.chasis);
+			parametros.put("cliente", this.cliente);
+			parametros.put("marca", this.marca);
+			parametros.put("modelo", this.modelo);
+			parametros.put("placa", this.placa);
+			parametros.put("color", this.color);
+			parametros.put("chasis", this.chasis);
 			parametros.put("vin", this.vin);
-			parametros.put("motor",this.motor);
-			parametros.put("totalFactura",this.totalFactura);
+			parametros.put("motor", this.motor);
+			parametros.put("totalFactura", this.totalFactura);
 			//Reporte = (JasperReport) JRLoader.loadObject(path);
 			Reporte = (JasperReport) JRLoader.loadObject(getClass().getResource("/reportes/FacturaPDF.jasper"));
 			JasperPrint jprint = JasperFillManager.fillReport(Reporte, parametros, cn);
@@ -127,17 +159,45 @@ public class Reportes extends Conexion {
 		}
 	}
 
-	public void infoFactura(){
+	public void generarProforma() throws SQLException {
+		try {
+			this.cn = conexion();
+			JasperReport Reporte = null;
+			Map parametros = new HashMap();
+			parametros.put("idProforma", this.idProforma);
+			parametros.put("fecha", this.sdf.format(this.fecha));
+			parametros.put("cliente", this.cliente);
+			parametros.put("marca", this.marca);
+			parametros.put("modelo", this.modelo);
+			parametros.put("placa", this.placa);
+			parametros.put("color", this.color);
+			parametros.put("chasis", this.chasis);
+			parametros.put("vin", this.vin);
+			parametros.put("motor", this.motor);
+			parametros.put("totalFactura", this.totalFactura);
+			//Reporte = (JasperReport) JRLoader.loadObject(path);
+			Reporte = (JasperReport) JRLoader.loadObject(getClass().getResource("/reportes/ProformaPDF.jasper"));
+			JasperPrint jprint = JasperFillManager.fillReport(Reporte, parametros, cn);
+			JasperViewer vista = new JasperViewer(jprint, false);
+			vista.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+			vista.setVisible(true);
+			cn.close();
+		} catch (JRException ex) {
+			JOptionPane.showMessageDialog(null, ex);
+		}
+	}
+
+	public void infoFactura() {
 		this.cn = conexion();
 		try {
 			this.pst = this.cn.prepareStatement(
 				"SELECT f.*,a.*,p.nombres,apellidos FROM facturacion AS f INNER JOIN autos AS a ON(f.auto=a.placa)"
-					+ "INNER JOIN propietario AS p ON(a.propietario=p.id) WHERE f.id = ?"
+				+ "INNER JOIN propietario AS p ON(a.propietario=p.id) WHERE f.id = ?"
 			);
 			this.pst.setInt(1, this.idFactura);
 			this.rs = this.pst.executeQuery();
-			while(this.rs.next()){
-				this.fecha = this.rs.getTimestamp("fecha");	
+			while (this.rs.next()) {
+				this.fecha = this.rs.getTimestamp("fecha");
 				this.cliente = this.rs.getString("nombres") + " " + this.rs.getString("apellidos");
 				this.marca = this.rs.getString("marca");
 				this.modelo = this.rs.getString("modelo");
@@ -150,7 +210,7 @@ public class Reportes extends Conexion {
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
-		}finally{
+		} finally {
 			try {
 				this.cn.close();
 			} catch (SQLException ex) {

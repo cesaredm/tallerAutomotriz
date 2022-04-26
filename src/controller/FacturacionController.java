@@ -29,7 +29,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import model.ComponentesCmbModel;
+import model.CmbServicios;
 import model.DetallesModel;
 import model.FacturacionModel;
 import model.Reportes;
@@ -43,8 +43,9 @@ public class FacturacionController implements ActionListener, KeyListener, Caret
 
 	Menu menu;
 	FacturacionModel facturacionModel;
-	ComponentesCmbModel componentesCmbModel;
+	CmbServicios cmbServicios;
 	DetallesModel detallesModel;
+	CreateServiceComponentFacturacion services;
 	Reportes reportePDF;
 	float precio,
 		cantidad,
@@ -69,7 +70,6 @@ public class FacturacionController implements ActionListener, KeyListener, Caret
 	public FacturacionController(Menu menu, FacturacionModel facturacionModel) {
 		this.menu = menu;
 		this.facturacionModel = facturacionModel;
-		this.componentesCmbModel = new ComponentesCmbModel();
 		this.detallesModel = new DetallesModel();
 		this.reportePDF = new Reportes();
 		this.actualizarNumeroFactura();
@@ -82,7 +82,7 @@ public class FacturacionController implements ActionListener, KeyListener, Caret
 		this.mostrarProformas("");
 		this.menu.jcFechaFactura.setDate(this.fecha);
 		this.menu.rbFactura.setSelected(true);
-		this.menu.cmbServiciosFacturacion.setModel(this.facturacionModel.showServiciosCmb());
+		//this.menu.cmbServiciosFacturacion.setModel(this.facturacionModel.showServiciosCmb());
 		this.menu.btnAgregarServicioFacturacion.addActionListener(this);
 		this.menu.btnAgregarServicioFacturacion.setActionCommand("btnAgregarServicioFacturacion");
 		this.menu.btnCalcular.addActionListener(this);
@@ -138,9 +138,9 @@ public class FacturacionController implements ActionListener, KeyListener, Caret
 		menu.tblProformas.getTableHeader().setForeground(new Color(255, 255, 255));
 		menu.tblProformas.getTableHeader().setPreferredSize(new java.awt.Dimension(0, 35));
 
-		menu.tblDetallesProformas.getTableHeader().setFont(new Font("Sugoe UI",Font.PLAIN,14));
+		menu.tblDetallesProformas.getTableHeader().setFont(new Font("Sugoe UI", Font.PLAIN, 14));
 		menu.tblDetallesProformas.getTableHeader().setOpaque(false);
-		menu.tblDetallesProformas.getTableHeader().setBackground(new Color(69,76,89));
+		menu.tblDetallesProformas.getTableHeader().setBackground(new Color(69, 76, 89));
 		menu.tblDetallesProformas.getTableHeader().setForeground(Color.WHITE);
 		menu.tblDetallesProformas.getTableHeader().setPreferredSize(new java.awt.Dimension(0, 35));
 	}
@@ -255,12 +255,15 @@ public class FacturacionController implements ActionListener, KeyListener, Caret
 				this.facturacionModel.setTotal(this.totalFactura);
 				if (this.menu.rbFactura.isSelected()) {
 					this.facturacionModel.guardar();
+					this.reportePDF.setTipoDoc("factura");
+					this.reportePDF.setIdFactura(Integer.parseInt(menu.lblNumeroFactura.getText()));
 				} else if (this.menu.rbProforma.isSelected()) {
 					this.facturacionModel.guardarProforma();
+					this.reportePDF.setTipoDoc("proforma");
+					this.reportePDF.setIdProforma(Integer.parseInt(menu.lblNumeroFactura.getText()));
 				}
 				this.guardarDetalle();
 				/* --------------------- SETEO DE DATOS PARA CREACION DE PDF --------------------*/
-				this.reportePDF.setIdFactura(Integer.parseInt(menu.lblNumeroFactura.getText()));
 				this.reportePDF.setFecha(this.menu.jcFechaFactura.getDate());
 				this.reportePDF.setMarca(this.menu.lblMarcaAuto.getText());
 				this.reportePDF.setModelo(this.menu.lblModeloAuto.getText());
@@ -271,10 +274,11 @@ public class FacturacionController implements ActionListener, KeyListener, Caret
 				this.reportePDF.setTotalFactura(this.totalFactura);
 				this.reportePDF.setCliente(this.menu.lblPropietarioAuto.getText());
 				this.reportePDF.setVin(this.menu.lblVin.getText());
-				this.reportePDF.generarFactura();
+				this.reportePDF.generarPDF();
 				this.actualizarNumeroFactura();
+				this.menu.rbFactura.setSelected(true);
 				this.limpiarFacturacion();
-			} catch (SQLException ex) {
+			} catch (Exception ex) {
 				Logger.getLogger(FacturacionController.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
@@ -410,7 +414,7 @@ public class FacturacionController implements ActionListener, KeyListener, Caret
 
 	}
 
-	public void DetallesProformas(){
+	public void DetallesProformas() {
 		int filaseleccionada = this.menu.tblProformas.getSelectedRow();
 		try {
 			this.detallesModel.setId(Integer.parseInt(this.menu.tblProformas.getValueAt(filaseleccionada, 0).toString()));
@@ -428,8 +432,8 @@ public class FacturacionController implements ActionListener, KeyListener, Caret
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 			case "btnAgregarServicioFacturacion": {
-				this.componentesCmbModel = (ComponentesCmbModel) this.menu.cmbServiciosFacturacion.getSelectedItem();
-				showComponents(this.componentesCmbModel.getId());
+				this.cmbServicios = (CmbServicios) this.menu.cmbServiciosFacturacion.getSelectedItem();
+				showComponents(this.cmbServicios.getId());
 			}
 			break;
 			case "btnCalcular": {
@@ -524,10 +528,10 @@ public class FacturacionController implements ActionListener, KeyListener, Caret
 			if (e.getClickCount() == 1) {
 				this.seleccionarAuto();
 			}
-		}else if(e.getSource() == this.menu.tblProformas){
-			if(e.getClickCount() == 2){ 
+		} else if (e.getSource() == this.menu.tblProformas) {
+			if (e.getClickCount() == 2) {
 				this.DetallesProformas();
-			}	
+			}
 		}
 	}
 

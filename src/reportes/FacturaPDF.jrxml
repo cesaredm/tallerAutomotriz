@@ -187,7 +187,7 @@
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[cod. -------------]]></text>
+				<text><![CDATA[cod. Factura ---]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -249,7 +249,7 @@
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{importe}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="60" y="3" width="292" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>

@@ -1,6 +1,8 @@
 package model;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -158,11 +160,16 @@ public class ServiciosModel extends Conexion {
 			this.pst = this.cn.prepareStatement(this.consulta);
 			this.rs = this.pst.executeQuery();
 			while (this.rs.next()) {
-				this.modeloCmb.addElement(new ComponentesCmbModel(this.rs.getInt("id"), this.rs.getString("nombre")));
+				this.modeloCmb.addElement(new CmbServicios(this.rs.getInt("id"), this.rs.getString("nombre")));
 			}
-			this.cn.close();
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, e);
+		}finally{
+			try {
+				this.cn.close();
+			} catch (SQLException ex) {
+				Logger.getLogger(ServiciosModel.class.getName()).log(Level.SEVERE, null, ex);
+			}
 		}
 		return this.modeloCmb;
 	}

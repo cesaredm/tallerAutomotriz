@@ -238,7 +238,7 @@ public class ComponenteController implements ActionListener, MouseListener, KeyL
 	public void keyPressed(KeyEvent e) {
 		if (e.getSource() == this.menu.txtNombreComponente && e.getKeyCode() == e.VK_DOWN) {
 			this.showWindowsAddServicio();
-		} else if (e.getSource() == this.menu.txtNombreComponente && e.getKeyCode() == e.VK_ENTER) {
+		} else if (e.getSource() == this.menu.txtNombreComponente && e.getKeyCode() == e.VK_ENTER && this.menu.btnGuardarComponete.isEnabled()) {
 			this.guardar();
 		} else if (e.getSource() == this.menu.tblAddServicioComponete && e.getKeyCode() == e.VK_ENTER) {
 			this.agregarServicio();

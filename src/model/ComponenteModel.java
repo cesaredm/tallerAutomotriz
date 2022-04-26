@@ -23,6 +23,7 @@ public class ComponenteModel extends Conexion {
 	private int id;
 	Connection cn;
 	PreparedStatement pst;
+	Statement st;
 	ResultSet rs;
 	private String consulta;
 	String[] datos;
@@ -195,5 +196,31 @@ public class ComponenteModel extends Conexion {
 				Logger.getLogger(ComponenteModel.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
+	}
+
+	public String[] getLastComponent(){
+		String[] component = new String[5];
+		this.cn = conexion();
+		this.consulta = "SELECT * FROM componentes ORDER BY id DESC LIMIT 1";
+		try {
+			this.st = this.cn.createStatement();
+			this.rs = this.st.executeQuery(this.consulta);
+			while(this.rs.next()){
+				component[0] = this.rs.getString("id");
+				component[1] = this.rs.getString("nombre");
+				component[2] = "1";
+				component[3] = "0";
+				component[4] = "0";
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				this.cn.close();
+			} catch (SQLException ex) {
+				Logger.getLogger(ComponenteModel.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}
+		return component;
 	}
 }

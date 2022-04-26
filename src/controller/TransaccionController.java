@@ -165,6 +165,8 @@ public class TransaccionController implements ActionListener, CaretListener {
 		this.menu.cmbTipoTransacion.setSelectedItem("Ingreso");
 		this.menu.jsMontoTransaccion.setValue(0);
 		this.menu.txtAreaAnotacionTransaccion.setText("");
+		this.menu.btnGuardarTransaccion.setEnabled(true);
+		this.menu.btnActualizarTransaccion.setEnabled(false);
 	}
 
 }

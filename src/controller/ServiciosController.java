@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import model.ServiciosModel;
 import javax.swing.event.CaretEvent;
@@ -28,6 +29,7 @@ public class ServiciosController implements ActionListener, CaretListener, KeyLi
 		this.ServiciosModel = serviciosModel;
 		this.componenteModel = new ComponenteModel();
 		mostrar("");
+		this.showServiciosCmb();
 
 		this.menu.btnGuardarServicios.addActionListener(this);
 		this.menu.btnGuardarServicios.setActionCommand("btnGuardarServicios");
@@ -52,7 +54,7 @@ public class ServiciosController implements ActionListener, CaretListener, KeyLi
 				guardar();
 				mostrar("");
 				showServiciosToComponentes("");
-				this.menu.cmbServiciosFacturacion.setModel(this.ServiciosModel.showServiciosCmb());
+				this.showServiciosCmb();
 			}
 			break;
 			case "mnEditarServicios": {
@@ -63,6 +65,7 @@ public class ServiciosController implements ActionListener, CaretListener, KeyLi
 				actualizar();
 				mostrar("");
 				showServiciosToComponentes("");
+				this.showServiciosCmb();
 			}
 			break;
 
@@ -72,7 +75,6 @@ public class ServiciosController implements ActionListener, CaretListener, KeyLi
 	public void guardar() {
 		if (validarDatos()) {
 			this.ServiciosModel.setNombre(this.nombre);
-
 			this.ServiciosModel.guardar();
 			limpiar();
 		} else {
@@ -155,6 +157,12 @@ public class ServiciosController implements ActionListener, CaretListener, KeyLi
 			JOptionPane.showMessageDialog(null, e + " ERROR: en el metodo showComponentService en el ctrl servicios.");
 		}
 
+	}
+
+	public void showServiciosCmb(){
+		//DefaultComboBoxModel cmbModel = this.ServiciosModel.showServiciosCmb();
+		this.menu.cmbServiciosFacturacion.setModel(this.ServiciosModel.showServiciosCmb());
+		this.menu.cmbElegirServicio.setModel(this.ServiciosModel.showServiciosCmb());
 	}
 
 	public void caretUpdate(CaretEvent e) {

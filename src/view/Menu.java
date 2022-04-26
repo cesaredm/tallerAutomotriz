@@ -5,20 +5,25 @@
  */
 package view;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author CESAR DIAZ MARADIAGA
  */
 public class Menu extends javax.swing.JFrame {
 
-    public Object editarServicioss;
+	ImageIcon icono;
+	public Object editarServicioss;
 
 	/**
 	 * Creates new form Menu
 	 */
 	public Menu() {
+		icono = new ImageIcon(this.getClass().getResource("/img/icono.png"));
 		initComponents();
-                this.setLocationRelativeTo(null);
+		setIconImage(icono.getImage());
+		this.setLocationRelativeTo(null);
 	}
 
 	/**
@@ -86,10 +91,19 @@ public class Menu extends javax.swing.JFrame {
                 jdDetallesFacturas = new javax.swing.JDialog();
                 jScrollPane15 = new javax.swing.JScrollPane();
                 tblDetallesFactura = new javax.swing.JTable();
-                btnEditarFactura = new javax.swing.JButton();
                 jdDetallesProforma = new javax.swing.JDialog();
                 jScrollPane19 = new javax.swing.JScrollPane();
                 tblDetallesProformas = new javax.swing.JTable();
+                jdCrearMas = new javax.swing.JDialog();
+                cmbElegirServicio = new javax.swing.JComboBox<>();
+                jLabel73 = new javax.swing.JLabel();
+                jLabel74 = new javax.swing.JLabel();
+                txtNombreComponenteFacturacion = new javax.swing.JTextField();
+                btnAgregarComponenteFacturacion = new javax.swing.JButton();
+                btnCrearServicioFacturacion = new javax.swing.JButton();
+                jLabel75 = new javax.swing.JLabel();
+                txtNombreServicioFacturacion = new javax.swing.JTextField();
+                btnCrearServicio = new javax.swing.JButton();
                 groupReportes = new javax.swing.ButtonGroup();
                 groupTipoDoc = new javax.swing.ButtonGroup();
                 pnlPrincipal = new javax.swing.JPanel();
@@ -152,6 +166,7 @@ public class Menu extends javax.swing.JFrame {
                 tblComponentesFacturacion = new javax.swing.JTable();
                 lblTotalFactura = new javax.swing.JLabel();
                 jLabel38 = new javax.swing.JLabel();
+                btnCrearMas = new javax.swing.JButton();
                 btnGuardarFactura = new javax.swing.JButton();
                 btnGuardarImprimirFactura = new javax.swing.JButton();
                 btnLimpiarFactura = new javax.swing.JButton();
@@ -366,6 +381,9 @@ public class Menu extends javax.swing.JFrame {
                 eliminarTransaccion.setActionCommand("mnEliminarTransaccion");
                 mnTransacciones.add(eliminarTransaccion);
 
+                jdAddServicioComponente.setTitle("Serrvicios");
+                jdAddServicioComponente.setIconImage(this.icono.getImage());
+
                 jLabel34.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
                 jLabel34.setText("Buscar:");
 
@@ -411,6 +429,7 @@ public class Menu extends javax.swing.JFrame {
                 );
 
                 jdComponentesServicio.setTitle("Componentes");
+                jdComponentesServicio.setIconImage(this.icono.getImage());
 
                 tblComponenteServicio.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
                 tblComponenteServicio.setModel(new javax.swing.table.DefaultTableModel(
@@ -439,6 +458,7 @@ public class Menu extends javax.swing.JFrame {
                 );
 
                 jdPropietarios.setTitle("Propietarios");
+                jdPropietarios.setIconImage(this.icono.getImage());
 
                 jLabel35.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
                 jLabel35.setText("Buscar");
@@ -487,6 +507,7 @@ public class Menu extends javax.swing.JFrame {
                 );
 
                 jdAutosFacturacion.setTitle("Autos");
+                jdAutosFacturacion.setIconImage(this.icono.getImage());
 
                 jLabel39.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
                 jLabel39.setText("Buscar auto:");
@@ -530,6 +551,9 @@ public class Menu extends javax.swing.JFrame {
                                 .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE))
                 );
 
+                jdAutosRA.setTitle("Lista de autos");
+                jdAutosRA.setIconImage(this.icono.getImage());
+
                 tblAutosRA.setModel(new javax.swing.table.DefaultTableModel(
                         new Object [][] {
                                 {null, null, null, null},
@@ -572,6 +596,7 @@ public class Menu extends javax.swing.JFrame {
                 );
 
                 jdAperturaCaja.setTitle("Realizar Apertura");
+                jdAperturaCaja.setIconImage(this.icono.getImage());
 
                 jLabel55.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
                 jLabel55.setText("Fecha");
@@ -626,6 +651,7 @@ public class Menu extends javax.swing.JFrame {
                 );
 
                 jdDetallesFacturas.setTitle("Detalles de factura");
+                jdDetallesFacturas.setIconImage(this.icono.getImage());
 
                 tblDetallesFactura.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
                 tblDetallesFactura.setModel(new javax.swing.table.DefaultTableModel(
@@ -642,29 +668,19 @@ public class Menu extends javax.swing.JFrame {
                 tblDetallesFactura.setRowHeight(24);
                 jScrollPane15.setViewportView(tblDetallesFactura);
 
-                btnEditarFactura.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-                btnEditarFactura.setText("Editar");
-
                 javax.swing.GroupLayout jdDetallesFacturasLayout = new javax.swing.GroupLayout(jdDetallesFacturas.getContentPane());
                 jdDetallesFacturas.getContentPane().setLayout(jdDetallesFacturasLayout);
                 jdDetallesFacturasLayout.setHorizontalGroup(
                         jdDetallesFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 989, Short.MAX_VALUE)
-                        .addGroup(jdDetallesFacturasLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnEditarFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
                 jdDetallesFacturasLayout.setVerticalGroup(
                         jdDetallesFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdDetallesFacturasLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnEditarFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
+                        .addComponent(jScrollPane15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
                 );
 
                 jdDetallesProforma.setTitle("Detalles de proforma");
+                jdDetallesProforma.setIconImage(this.icono.getImage());
 
                 tblDetallesProformas.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
                 tblDetallesProformas.setModel(new javax.swing.table.DefaultTableModel(
@@ -692,17 +708,107 @@ public class Menu extends javax.swing.JFrame {
                         .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
                 );
 
+                jdCrearMas.setTitle("Agregar Servicios o componentes");
+
+                cmbElegirServicio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+                cmbElegirServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+                jLabel73.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+                jLabel73.setText("Elegir Servicio:");
+
+                jLabel74.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+                jLabel74.setText("Nombre de Componente:");
+
+                txtNombreComponenteFacturacion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+                txtNombreComponenteFacturacion.setActionCommand("txtNombreComponenteFacturacion");
+
+                btnAgregarComponenteFacturacion.setText("Agregar Componente");
+                btnAgregarComponenteFacturacion.setActionCommand("btnAgregarComponenteFacturacion");
+
+                btnCrearServicioFacturacion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+                btnCrearServicioFacturacion.setText("Crear Servicio");
+                btnCrearServicioFacturacion.setActionCommand("btnCrearServicioFacturacion");
+
+                jLabel75.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+                jLabel75.setText("Nombre de servicio:");
+
+                txtNombreServicioFacturacion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+                txtNombreServicioFacturacion.setActionCommand("txtNombreServicioFacturacion");
+
+                btnCrearServicio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+                btnCrearServicio.setText("Crear");
+                btnCrearServicio.setActionCommand("btnCrearServicio");
+
+                javax.swing.GroupLayout jdCrearMasLayout = new javax.swing.GroupLayout(jdCrearMas.getContentPane());
+                jdCrearMas.getContentPane().setLayout(jdCrearMasLayout);
+                jdCrearMasLayout.setHorizontalGroup(
+                        jdCrearMasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jdCrearMasLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jdCrearMasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jdCrearMasLayout.createSequentialGroup()
+                                                .addComponent(txtNombreComponenteFacturacion)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btnAgregarComponenteFacturacion))
+                                        .addGroup(jdCrearMasLayout.createSequentialGroup()
+                                                .addGroup(jdCrearMasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(jdCrearMasLayout.createSequentialGroup()
+                                                                .addComponent(cmbElegirServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(btnCrearServicioFacturacion))
+                                                        .addComponent(jLabel73)
+                                                        .addComponent(jLabel74))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jdCrearMasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(jdCrearMasLayout.createSequentialGroup()
+                                                                .addComponent(jLabel75)
+                                                                .addGap(0, 0, Short.MAX_VALUE))
+                                                        .addGroup(jdCrearMasLayout.createSequentialGroup()
+                                                                .addComponent(txtNombreServicioFacturacion, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(btnCrearServicio, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)))))
+                                .addContainerGap())
+                );
+                jdCrearMasLayout.setVerticalGroup(
+                        jdCrearMasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jdCrearMasLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jdCrearMasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(jdCrearMasLayout.createSequentialGroup()
+                                                .addComponent(jLabel73)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jdCrearMasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(cmbElegirServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnCrearServicioFacturacion)))
+                                        .addGroup(jdCrearMasLayout.createSequentialGroup()
+                                                .addComponent(jLabel75)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jdCrearMasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(txtNombreServicioFacturacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnCrearServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel74)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jdCrearMasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(btnAgregarComponenteFacturacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtNombreComponenteFacturacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(15, Short.MAX_VALUE))
+                );
+
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-                setSize(new java.awt.Dimension(0, 0));
+                setTitle("Multi servicios automotriz y repuestos");
+                setMinimumSize(new java.awt.Dimension(1229, 610));
+                setPreferredSize(new java.awt.Dimension(1229, 610));
+                setSize(new java.awt.Dimension(1229, 550));
 
                 pnlLateral.setBackground(new java.awt.Color(56, 56, 56));
                 pnlLateral.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-                jLabel1.setBackground(new java.awt.Color(0, 153, 102));
+                jLabel1.setBackground(new java.awt.Color(51, 51, 51));
                 jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
                 jLabel1.setForeground(new java.awt.Color(255, 255, 255));
                 jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                jLabel1.setText("Taller Automotriz");
+                jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icono.png"))); // NOI18N
                 jLabel1.setOpaque(true);
                 pnlLateral.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 168, 70));
                 pnlLateral.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 97, 168, 10));
@@ -1146,6 +1252,12 @@ public class Menu extends javax.swing.JFrame {
                 jLabel38.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
                 jLabel38.setText("Total:");
 
+                btnCrearMas.setBackground(new java.awt.Color(0, 102, 204));
+                btnCrearMas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+                btnCrearMas.setForeground(new java.awt.Color(255, 255, 255));
+                btnCrearMas.setText("Crear +");
+                btnCrearMas.setActionCommand("btnCrearMas");
+
                 javax.swing.GroupLayout pnlComponentesFacturacionLayout = new javax.swing.GroupLayout(pnlComponentesFacturacion);
                 pnlComponentesFacturacion.setLayout(pnlComponentesFacturacionLayout);
                 pnlComponentesFacturacionLayout.setHorizontalGroup(
@@ -1154,8 +1266,9 @@ public class Menu extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addGroup(pnlComponentesFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 1003, Short.MAX_VALUE)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlComponentesFacturacionLayout.createSequentialGroup()
-                                                .addGap(0, 0, Short.MAX_VALUE)
+                                        .addGroup(pnlComponentesFacturacionLayout.createSequentialGroup()
+                                                .addComponent(btnCrearMas, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(jLabel38)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(lblTotalFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1165,11 +1278,13 @@ public class Menu extends javax.swing.JFrame {
                         pnlComponentesFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pnlComponentesFacturacionLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(pnlComponentesFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(lblTotalFactura, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                                        .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(pnlComponentesFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(pnlComponentesFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(lblTotalFactura, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                                                .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(btnCrearMas))
                                 .addContainerGap())
                 );
 
@@ -1232,7 +1347,7 @@ public class Menu extends javax.swing.JFrame {
                                         .addComponent(btnGuardarFactura)
                                         .addComponent(btnGuardarImprimirFactura)
                                         .addComponent(btnLimpiarFactura))
-                                .addContainerGap(381, Short.MAX_VALUE))
+                                .addContainerGap(359, Short.MAX_VALUE))
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                                         .addGap(224, 224, 224)
@@ -1375,7 +1490,7 @@ public class Menu extends javax.swing.JFrame {
                                                 .addComponent(txtBuscarRA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(btnBuscarRAporFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE))
+                                .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE))
                 );
 
                 javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
@@ -1462,7 +1577,7 @@ public class Menu extends javax.swing.JFrame {
                                         .addComponent(txtBuscarProforma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel70))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+                                .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
                                 .addContainerGap())
                 );
 
@@ -1697,7 +1812,7 @@ public class Menu extends javax.swing.JFrame {
                                                 .addComponent(jLabel60))
                                         .addComponent(txtBuscarFacturaId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(6, 6, 6)
-                                .addComponent(jScrollPane14, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                                .addComponent(jScrollPane14, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
                                 .addGap(5, 5, 5))
                 );
 
@@ -1881,7 +1996,7 @@ public class Menu extends javax.swing.JFrame {
                                         .addComponent(jLabel23)
                                         .addComponent(txtBuscarServicios))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
                                 .addContainerGap())
                 );
 
@@ -1935,7 +2050,7 @@ public class Menu extends javax.swing.JFrame {
                                         .addComponent(txtBuscarComponenetes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel22))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
                                 .addContainerGap())
                 );
 
@@ -2509,7 +2624,7 @@ public class Menu extends javax.swing.JFrame {
                                         .addComponent(txtBuscarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel20))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
                                 .addContainerGap())
                 );
 
@@ -2703,7 +2818,7 @@ public class Menu extends javax.swing.JFrame {
                 pnlPrincipalLayout.setVerticalGroup(
                         pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(pnlVista, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(pnlLateral, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
+                        .addComponent(pnlLateral, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
                 );
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -2721,31 +2836,31 @@ public class Menu extends javax.swing.JFrame {
         }// </editor-fold>//GEN-END:initComponents
 
     private void txtApellidosClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidosClientesActionPerformed
-        // TODO add your handling code here:
+	    // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidosClientesActionPerformed
 
     private void btnGuardarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarClientesActionPerformed
-        // TODO add your handling code here:
+	    // TODO add your handling code here:
     }//GEN-LAST:event_btnGuardarClientesActionPerformed
 
     private void btnGuardarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarUsuarioActionPerformed
-        // TODO add your handling code here:
+	    // TODO add your handling code here:
     }//GEN-LAST:event_btnGuardarUsuarioActionPerformed
 
     private void txtBuscarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarUsuariosActionPerformed
-        // TODO add your handling code here:
+	    // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarUsuariosActionPerformed
 
     private void txtBuscarComponenetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarComponenetesActionPerformed
-        // TODO add your handling code here:
+	    // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarComponenetesActionPerformed
 
     private void EditarServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarServiciosActionPerformed
-        // TODO add your handling code here:
+	    // TODO add your handling code here:
     }//GEN-LAST:event_EditarServiciosActionPerformed
 
     private void txtBuscarPropietarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarPropietarioActionPerformed
-        // TODO add your handling code here:
+	    // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarPropietarioActionPerformed
 
 	/**
@@ -2798,13 +2913,16 @@ public class Menu extends javax.swing.JFrame {
         public javax.swing.JButton btnActualizarServicios;
         public javax.swing.JButton btnActualizarTransaccion;
         public javax.swing.JButton btnActualizarUsuario;
+        public javax.swing.JButton btnAgregarComponenteFacturacion;
         public javax.swing.JButton btnAgregarServicioFacturacion;
         public javax.swing.JButton btnBuscarFacturasReporte;
         public javax.swing.JButton btnBuscarProforma;
         public javax.swing.JButton btnBuscarRAporFecha;
         public javax.swing.JButton btnCalcular;
         public javax.swing.JButton btnCrearApertura;
-        public javax.swing.JButton btnEditarFactura;
+        public javax.swing.JButton btnCrearMas;
+        public javax.swing.JButton btnCrearServicio;
+        public javax.swing.JButton btnCrearServicioFacturacion;
         public javax.swing.JButton btnGuardarApertura;
         public javax.swing.JButton btnGuardarAutos;
         public javax.swing.JButton btnGuardarClientes;
@@ -2822,6 +2940,7 @@ public class Menu extends javax.swing.JFrame {
         public javax.swing.JButton btnLimpiarTransaccion;
         public javax.swing.JButton btnNuevoUsuario;
         public javax.swing.JButton btnVentanaAutosFacturacion;
+        public javax.swing.JComboBox<String> cmbElegirServicio;
         public javax.swing.JComboBox<String> cmbServiciosFacturacion;
         public javax.swing.JComboBox<String> cmbTipoTransacion;
         public javax.swing.JMenuItem editarAuto;
@@ -2905,6 +3024,9 @@ public class Menu extends javax.swing.JFrame {
         private javax.swing.JLabel jLabel70;
         private javax.swing.JLabel jLabel71;
         private javax.swing.JLabel jLabel72;
+        private javax.swing.JLabel jLabel73;
+        private javax.swing.JLabel jLabel74;
+        private javax.swing.JLabel jLabel75;
         private javax.swing.JLabel jLabel8;
         private javax.swing.JLabel jLabel9;
         private javax.swing.JPanel jPanel1;
@@ -2961,6 +3083,7 @@ public class Menu extends javax.swing.JFrame {
         public javax.swing.JDialog jdAutosFacturacion;
         public javax.swing.JDialog jdAutosRA;
         public javax.swing.JDialog jdComponentesServicio;
+        public javax.swing.JDialog jdCrearMas;
         public javax.swing.JDialog jdDetallesFacturas;
         public javax.swing.JDialog jdDetallesProforma;
         public javax.swing.JDialog jdPropietarios;
@@ -3054,8 +3177,10 @@ public class Menu extends javax.swing.JFrame {
         public javax.swing.JTextField txtModelo;
         public javax.swing.JTextField txtMotor;
         public javax.swing.JTextField txtNombreComponente;
+        public javax.swing.JTextField txtNombreComponenteFacturacion;
         public javax.swing.JTextField txtNombrePropietario;
         public javax.swing.JTextField txtNombreServicioCOmponente;
+        public javax.swing.JTextField txtNombreServicioFacturacion;
         public javax.swing.JTextField txtNombresClientes;
         public javax.swing.JTextField txtNombresServicios;
         public javax.swing.JTextField txtNombresUsuarios;
@@ -3068,16 +3193,8 @@ public class Menu extends javax.swing.JFrame {
         public javax.swing.JTextField txtVin;
         // End of variables declaration//GEN-END:variables
 
-    public String geText() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	public String geText() {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
 
-   
-   
- 
-
- 
-
-   
-    
 }
