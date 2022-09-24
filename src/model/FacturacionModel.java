@@ -281,8 +281,8 @@ public class FacturacionModel extends Conexion {
 			while(this.rs.next()){
 				this.datos[0] = this.rs.getString("id");
 				this.datos[1] = this.rs.getString("nombre");
-				this.datos[2] = this.rs.getString("precio");
-				this.datos[3] = this.rs.getString("cantidad");
+				this.datos[2] = this.rs.getString("cantidad");
+				this.datos[3] = this.rs.getString("precio");
 				this.datos[4] = this.rs.getString("importe");
 				if (this.tableModel.getRowCount() < 12) {
 					this.tableModel.addRow(datos);

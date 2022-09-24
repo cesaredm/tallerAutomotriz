@@ -84,7 +84,7 @@
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[modelo:]]></text>
+				<text><![CDATA[Modelo:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="15" y="83" width="47" height="16"/>
@@ -252,12 +252,26 @@
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{importe}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="60" y="3" width="292" height="20"/>
+				<reportElement x="60" y="3" width="266" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="334" y="2" width="16" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[C$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="2" width="16" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[C$]]></text>
+			</staticText>
 		</band>
 	</detail>
 	<summary>
@@ -276,6 +290,26 @@
 				</textElement>
 				<text><![CDATA[Total : C$]]></text>
 			</staticText>
+			<line>
+				<reportElement x="7" y="32" width="114" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="13" y="35" width="100" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[FIRMA CLIENTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="124" y="35" width="133" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[FIRMA AUTORIZADA]]></text>
+			</staticText>
+			<line>
+				<reportElement x="130" y="32" width="122" height="1"/>
+			</line>
 		</band>
 	</summary>
 </jasperReport>

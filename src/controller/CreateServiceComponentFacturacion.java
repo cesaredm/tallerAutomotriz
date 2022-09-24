@@ -31,13 +31,12 @@ public class CreateServiceComponentFacturacion implements ActionListener, KeyLis
 
 	String nameService;
 	String nameComponent;
-	int idService;
+	int idService, filas;
 
 	public CreateServiceComponentFacturacion(Menu menu, ServiciosModel serviciosModel, ComponenteModel componentesModel) {
 		this.menu = menu;
 		this.componentesModel = componentesModel;
 		this.serviciosModel = serviciosModel;
-		this.tableModel = (DefaultTableModel) this.menu.tblComponentesFacturacion.getModel();
 		this.menu.btnCrearServicio.setEnabled(false);
 		this.menu.txtNombreServicioFacturacion.setEnabled(false);
 		this.menu.btnCrearMas.addActionListener(this);
@@ -71,18 +70,24 @@ public class CreateServiceComponentFacturacion implements ActionListener, KeyLis
 
 	public void agregarComponente() {
 		if (this.validarComponente()) {
+			this.filas = this.menu.tblComponentesFacturacion.getRowCount();
 			this.componentesModel.setNombre(nameComponent);
 			this.componentesModel.setServicio(idService);
 			this.componentesModel.guardar();
 			this.menu.txtNombreComponenteFacturacion.setText("");
 			int confirmar = JOptionPane.showConfirmDialog(
-			     null,
-			     "Quieres agregar este componente a la tabla de factura",
-			     "Informaciòn",
-			     JOptionPane.YES_NO_OPTION
+				null,
+				"Quieres agregar este componente a la tabla de factura",
+				"Informaciòn",
+				JOptionPane.YES_NO_OPTION
 			);
 			if (confirmar == JOptionPane.YES_OPTION) {
-				this.tableModel.addRow(this.componentesModel.getLastComponent());
+				if (this.filas < 12) {
+					this.tableModel = (DefaultTableModel) this.menu.tblComponentesFacturacion.getModel();
+					this.tableModel.addRow(this.componentesModel.getLastComponent());
+				}else{
+					JOptionPane.showMessageDialog(null,"Factura llego a su limite de items.");
+				}
 			}
 		}
 	}
@@ -140,9 +145,9 @@ public class CreateServiceComponentFacturacion implements ActionListener, KeyLis
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(e.getSource() == this.menu.txtNombreComponenteFacturacion && e.getKeyCode() == e.VK_ENTER){
+		if (e.getSource() == this.menu.txtNombreComponenteFacturacion && e.getKeyCode() == e.VK_ENTER) {
 			this.agregarComponente();
-		}else if(e.getSource() == this.menu.txtNombreServicioFacturacion && e.getKeyCode() == e.VK_ENTER){
+		} else if (e.getSource() == this.menu.txtNombreServicioFacturacion && e.getKeyCode() == e.VK_ENTER) {
 			this.agregarServicio();
 		}
 	}

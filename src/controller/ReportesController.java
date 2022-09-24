@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import model.Reportes;
 import model.ReportesModel;
 import view.Menu;
+import controller.Respaldo;
 
 /**
  *
@@ -61,6 +62,7 @@ public class ReportesController implements ActionListener, KeyListener, MouseLis
 		this.menu.btnGuardarApertura.setActionCommand("btnGuardarApertura");
 		this.menu.btnCrearApertura.addActionListener(this);
 		this.menu.btnCrearApertura.setActionCommand("btnCrearApertura");
+		this.menu.btnCrearRespaldo.addActionListener(this);
 		this.menu.txtBuscarFacturaId.addKeyListener(this);
 		this.menu.rbDiario.addActionListener(this);
 		this.menu.rbDiario.setActionCommand("rbDiario");
@@ -95,9 +97,9 @@ public class ReportesController implements ActionListener, KeyListener, MouseLis
 		this.reportesModel.ingresos();
 		this.reportesModel.egresos();
 		this.reportesModel.apertura();
-		this.totalEfectivoCaja = (this.reportesModel.getTotalFacturadoDiario() 
+		this.totalEfectivoCaja = (this.reportesModel.getTotalFacturadoDiario()
 			+ this.reportesModel.getApertura()
-			+this.reportesModel.getIngresosEfectivo()) - this.reportesModel.getEgresoEfectivo();
+			+ this.reportesModel.getIngresosEfectivo()) - this.reportesModel.getEgresoEfectivo();
 		/* set datos */
 
 		this.menu.lblAperturaReporte.setText(this.formato.format(this.reportesModel.getApertura()));
@@ -115,7 +117,7 @@ public class ReportesController implements ActionListener, KeyListener, MouseLis
 		this.reportesModel.getFacturadoRango();
 		this.reportesModel.ingresosRango();
 		this.reportesModel.egresosRango();
-		this.totalEfectivoCaja = (this.reportesModel.getTotalFacturadoRango() + this.reportesModel.getIngresosEfectivo()) 
+		this.totalEfectivoCaja = (this.reportesModel.getTotalFacturadoRango() + this.reportesModel.getIngresosEfectivo())
 			- this.reportesModel.getEgresoEfectivo();
 		/* set datos */
 
@@ -216,9 +218,9 @@ public class ReportesController implements ActionListener, KeyListener, MouseLis
 		this.menu.jdDetallesFacturas.setVisible(true);
 	}
 
-	public void ReimprimirFactura(){
+	public void ReimprimirFactura() {
 		this.fila = this.menu.tblFacturasReporte.getSelectedRow();
-		if(this.fila != -1){
+		if (this.fila != -1) {
 			try {
 				this.idFactura = Integer.parseInt(this.menu.tblFacturasReporte.getValueAt(this.fila, 0).toString());
 				this.reportesPDF.setIdFactura(this.idFactura);
@@ -262,9 +264,14 @@ public class ReportesController implements ActionListener, KeyListener, MouseLis
 				this.filtros();
 			}
 			break;
-			case "mnReimprimirFactura":{
+			case "mnReimprimirFactura": {
 				this.ReimprimirFactura();
-			}break;
+			}
+			break;
+			case "btnCrearRespaldo": {
+				Respaldo.backUp();
+			}
+			break;
 		}
 	}
 
